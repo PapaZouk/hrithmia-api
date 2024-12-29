@@ -1,8 +1,14 @@
-import Timesheet, {ITimesheet} from "../model/ITimesheet.ts";
+import Timesheet, { ITimesheet } from "../model/ITimesheet.ts";
+import mongoose from "mongoose";
+import {ObjectId} from "mongodb";
 
 export default function mapResponseToTimesheet(data: ITimesheet) {
+    if (!mongoose.Types.ObjectId.isValid(data.employeeId)) {
+        throw new Error("Invalid employeeId");
+    }
+
     return new Timesheet({
-        employeeId: data.employeeId,
+        employeeId: new ObjectId(data.employeeId),
         year: data.year,
         month: data.month,
         totalHours: data.totalHours,

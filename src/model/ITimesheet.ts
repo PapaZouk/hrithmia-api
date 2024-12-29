@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface ITimesheet extends Document {
+    _id: string;
     employeeId: string;
     year: number;
     month: number;

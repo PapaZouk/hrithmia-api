@@ -3,7 +3,7 @@ import { getDbConfig } from "./config.ts";
 
 let isConnected: boolean = false;
 
-export async function connectDb() {
+export async function connectDb(): Promise<void> {
     if (isConnected) {
         return;
     }

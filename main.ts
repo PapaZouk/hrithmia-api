@@ -1,14 +1,9 @@
-import { Context, Hono } from 'hono';
-import { logger } from 'hono/logger';
-import { cors } from "hono/cors";
+import {Context, Hono} from 'hono';
+import {logger} from 'hono/logger';
+import {cors} from "hono/cors";
 import {jwt} from "hono/jwt";
 import {healthCheck} from "./src/controllers/employee/healthCheck.ts";
 import {generateToken} from "./src/authentication/generateToken.ts";
-import {getAllEmployees} from "./src/controllers/employee/getAllEmployees.ts";
-import {getEmployeeById} from "./src/controllers/employee/getEmployeeById.ts";
-import {addEmployee} from "./src/controllers/employee/addEmployee.ts";
-import {deleteEmployeeById} from "./src/controllers/employee/deleteEmployeeById.ts";
-import {updateEmployeeById} from "./src/controllers/employee/updateEmployeeById.ts";
 import employeeRouter from "./src/router/employeeRouter.ts";
 import timesheetRouter from "./src/router/timesheetRouter.ts";
 

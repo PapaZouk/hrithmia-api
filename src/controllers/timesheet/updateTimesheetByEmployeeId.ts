@@ -27,6 +27,6 @@ export const updateTimesheetByEmployeeId = async (c: Context): Promise<TypedResp
         return c.json({message: "Timesheet updated with employeeId: " + employeeId});
     } catch (error) {
         console.error((error as Error).message);
-        return c.json({error});
+        return c.json({ error: (error as Error).message });
     }
 }

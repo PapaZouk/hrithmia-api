@@ -6,28 +6,29 @@ on:
   pull_request:
     branches: ["master"]
 
-permissions:
-      id-token: write
-      contents: read 
-
 jobs:
-  test:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
-      - name: Setup repo
-        uses: actions/checkout@v4
+        - name: Clone repository
+          uses: actions/checkout@v4
 
-      - name: Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
+        - name: Install Deno
+          uses: denoland/setup-deno@v2
+          with:
+            deno-version: v2.x
 
-      - name: Upload to Deno Deploy
-        uses: denoland/deployctl@v1
-        with:
-          project: "hrithmia-api"
-          entrypoint: "main.ts"
-          root: "."
-        env:
-          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
+        - name: Upload to Deno Deploy
+          uses: denoland/deployctl@v1
+          with:
+            project: "hrithmia-api"
+            entrypoint: "main.ts"
+            root: "."
+          env:
+            DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}

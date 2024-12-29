@@ -11,6 +11,6 @@ export const getTimesheetById = async (c: Context): Promise<TypedResponse> => {
         return c.json({result});
     } catch (error) {
         console.error((error as Error).message);
-        return c.json({error});
+        return c.json({ error: (error as Error).message });
     }
 }

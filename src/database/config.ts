@@ -35,7 +35,7 @@ export const getDbConfig = () => {
         port = parseInt(Deno.env.get("LOCAL_DB_PORT") || "") || 8000;
         appName = Deno.env.get("LOCAL_DB_APP_NAME") || '';
         settings = 'authSource=admin';
-        url = `mongodb://${username}:${password}@${cluster}:${port}/?${settings}`;
+        url = `mongodb://${username}:${password}@${cluster}:${port}/test?${settings}`;
     }
 
     return {

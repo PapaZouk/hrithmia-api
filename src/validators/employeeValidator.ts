@@ -1,4 +1,4 @@
-import { z } from "npm:zod";
+import {z} from "npm:zod";
 
 const employeeSchema = z.object({
     personalData: z.object({
@@ -8,9 +8,10 @@ const employeeSchema = z.object({
             .min(3, "Last name must be at least 3 characters long"),
         email: z.string().email(),
         phone: z.string()
-            .regex(/^\+48[0-9]{9}$/, 'Phone number must be in format +48XXXXXXXXX'),
+            .regex(/^\d{3}-\d{3}-\d{3}$/, 'Phone number must be in format 000-000-000'),
         pesel: z.string()
-            .length(11, "PESEL must be exactly 11 characters long")
+            .min(11, "PESEL must be exactly 11 characters long")
+            .max(11, "PESEL must be exactly 11 characters long")
             .regex(/^\d+$/, "PESEL must contain only digits"),
         clothSize: z.enum(["XS", "S", "M", "L", "XL", "XXL", "XXXL"]),
         address1: z.object({
@@ -31,7 +32,7 @@ const employeeSchema = z.object({
         }),
     }),
     jobDetails: z.object({
-        status: z.enum(["active", "inactive", "probation", "terminated"]),
+        status: z.enum(["active", "inactive", "terminated", "suspended", "on-leave", "retired"]),
         jobTitle: z.string().min(2, "Job title must be at least 2 characters long"),
         department: z.string().nonempty('Department name cannot be empty'),
         startDate: z
@@ -40,8 +41,21 @@ const employeeSchema = z.object({
         endDate: z
             .string()
             .optional(),
-        contractType: z.enum(["full-time", "part-time", "contract", "internship"]),
-        workSchedule: z.enum(["day", "night", "flexible"]),
+        contractType: z.enum([
+            "b2b",
+            "uop",
+            "mandate",
+            "specific-task",
+            "temporary",
+            "internship",
+            "part-time",
+        ]),
+        workSchedule: z.enum([
+            "full-time",
+            "part-time",
+            "remote",
+            "business-trips",
+        ]),
         insuranceType: z.enum(["commercial", "a1"]),
         annualLeaveDays: z.number()
             .min(0, "Annual leave days must be a positive number"),
@@ -50,7 +64,8 @@ const employeeSchema = z.object({
                 .min(0, "Base salary must be a positive number"),
             currency: z.enum(["PLN", "EUR", "USD", "GBP"]),
             bankAccount: z.string()
-                .regex(/^\d{26}$/, "Bank account number must be exactly 26 digits long"),
+                .min(26, "Bank account number must be exactly 26 digits long")
+                .max(26, "Bank account number must be exactly 26 digits long"),
             bankName: z.string().nonempty('Bank name cannot be empty'),
         }),
     }),

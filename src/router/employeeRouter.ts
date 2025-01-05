@@ -9,8 +9,8 @@ const employeeRouter = new Hono();
 
 employeeRouter.get('all', async (c: Context) => await getAllEmployees(c));
 employeeRouter.get(':id', async (c: Context) => await getEmployeeById(c));
-employeeRouter.post('/', async (c: Context) => await addEmployee(c));
-employeeRouter.put(':id', async (c: Context) => await updateEmployeeById(c));
-employeeRouter.delete(':id', async (c: Context) => await deleteEmployeeById(c));
+employeeRouter.post('/add/', async (c: Context) => await addEmployee(c));
+employeeRouter.put('/update/:id', async (c: Context) => await updateEmployeeById(c));
+employeeRouter.delete('/delete/:id', async (c: Context) => await deleteEmployeeById(c));
 
 export default employeeRouter;

@@ -18,7 +18,7 @@ export const updateTimesheetByEmployeeId = async (c: Context): Promise<TypedResp
         const timesheet = await Timesheet.findOneAndUpdate(
             { employeeId },
             { $set: data },
-            { new: true, runValidators: true }
+            { new: false, runValidators: true }
         );
 
         if (!timesheet) {

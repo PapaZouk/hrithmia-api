@@ -49,4 +49,7 @@ const TimesheetSchema: Schema = new Schema({
     }]
 });
 
+TimesheetSchema.index({ employeeId: 1, year: 1, month: 1 }, { unique: true });
+TimesheetSchema.index({ employeeId: 1 });
+
 export default mongoose.model<ITimesheet>('Timesheet', TimesheetSchema);

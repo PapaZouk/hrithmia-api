@@ -7,7 +7,16 @@ export const getTimesheetByEmployeeId = async (c: Context): Promise<TypedRespons
     try {
         await connectDb();
         const employeeId = c.req.param('id');
-        const result = await Timesheet.find({ employeeId: new ObjectId(employeeId) });
+
+        const queryYear = c.req.query('year');
+        const queryMonth = c.req.query('month');
+
+        const result = await Timesheet.find({
+            employeeId: new ObjectId(employeeId),
+            year: queryYear,
+            month: queryMonth
+        });
+
         return c.json({ result });
     } catch (error) {
         console.error((error as Error).message);

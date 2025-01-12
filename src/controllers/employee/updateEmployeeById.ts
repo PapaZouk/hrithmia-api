@@ -58,6 +58,10 @@ const updateEmployeeData = (employee: IEmployee, data: any) => {
             salary: {
                 ...employee.jobDetails?.salary,
                 ...data.jobDetails?.salary,
+                salaryHistory: [
+                    ...employee.jobDetails?.salary?.salaryHistory,
+                    ...data.jobDetails?.salary?.salaryHistory
+                ]
             }
         };
     }

@@ -10,14 +10,13 @@ export const getAllEmployeesWithIds: (c: Context) => Promise<TypedResponse> =
       const ids: string[] = c.req.query("ids")?.split(",") || [];
 
       if (ids.length === 0) {
-        c.status(400);
-        return c.json({ error: "IDs are required" });
+        return c.json({ error: "IDs are required" }, 400);
       }
 
       const result = await Employee.find({ _id: { $in: ids } });
 
       if (!result || result.length === 0) {
-        return c.json({ error: "No employees found" });
+        return c.json({ error: "No employees found" }, 404);
       }
 
       return c.json({ result });

@@ -5,12 +5,12 @@ export const healthCheck = async (c: Context) => {
     try {
         await connectDb();
 
-        return c.json({ status: "ok" });
+        return c.json({ status: "ok" }, 200);
     } catch (error) {
         console.error((error as Error).message);
         return c.json({
             status: 'Unhealthy',
             error: (error as Error).message,
-        });
+        }, 500);
     }
 };

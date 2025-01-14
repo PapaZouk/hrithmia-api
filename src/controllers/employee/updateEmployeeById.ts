@@ -12,8 +12,7 @@ export const updateEmployeeById = async (
     const id = c.req.param("id");
 
     if (!id) {
-      c.status(400);
-      return c.json({ message: "ID is required" });
+      return c.json({ message: "ID is required" }, 400);
     }
 
     const data = await c.req.json();
@@ -21,8 +20,7 @@ export const updateEmployeeById = async (
     const employee: IEmployee | null = await Employee.findById(id);
 
     if (!employee) {
-      c.status(404);
-      return c.json({ message: "Employee not found" });
+      return c.json({ message: "Employee not found" }, 404);
     }
 
     console.log("Updating employee data");
@@ -30,10 +28,10 @@ export const updateEmployeeById = async (
 
     await employee.save();
 
-    return c.json({ message: "Employee updated" });
+    return c.json({ message: "Employee updated" }, 200);
   } catch (error) {
     console.error((error as Error).message);
-    return c.json({ error: (error as Error).message });
+    return c.json({ error: (error as Error).message }, 500);
   }
 };
 

@@ -8,12 +8,12 @@ export const getAllEmployees = async (c: Context): Promise<TypedResponse> => {
         const result = await Employee.find({});
 
         if (!result) {
-            return c.json({error: "No employees found"});
+            return c.json({error: "No employees found"}, 404);
         }
 
-        return c.json({result});
+        return c.json({result}, 200);
     } catch (error) {
         console.error((error as Error).message);
-        return c.json({ error: (error as Error).message });
+        return c.json({ error: (error as Error).message }, 500);
     }
 }

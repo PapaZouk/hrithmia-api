@@ -7,6 +7,7 @@ import {generateToken} from "./src/authentication/generateToken.ts";
 import employeeRouter from "./src/router/employeeRouter.ts";
 import timesheetRouter from "./src/router/timesheetRouter.ts";
 import userRouter from "./src/router/userRouter.ts";
+import notificationRouter from "./src/router/notificationRouter.ts";
 
 const app = new Hono();
 const secretKey = Deno.env.get('JWT_SECRET_KEY');
@@ -34,5 +35,6 @@ app.get('/api/token/:id', async (c: Context) => {
 app.route('/api/auth/employee', employeeRouter);
 app.route('/api/auth/timesheet', timesheetRouter);
 app.route('/api/auth/user', userRouter);
+app.route('/api/auth/notification', notificationRouter);
 
 Deno.serve(app.fetch);

@@ -1,4 +1,4 @@
-import {Context, TypedResponse} from "hono";
+import {Context} from "hono";
 import {connectDb} from "../../database/connectDb.ts";
 import {userValidator} from "../../validators/userValidator.ts";
 import mapResponseToUser from "../../mapper/mapResponseToUser.ts";

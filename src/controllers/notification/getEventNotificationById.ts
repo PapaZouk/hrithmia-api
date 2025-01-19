@@ -11,7 +11,7 @@ export const getEventNotificationById = async (
     const id = c.req.param("id");
     console.log("Requesting notification with id: ", id);
 
-    const result = await EventNotification.findOne({ _id: id });
+    const result = await EventNotification.find({ userId: id });
     return c.json({ result }, 200);
   } catch (error) {
     console.error((error as Error).message);

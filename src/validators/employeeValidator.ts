@@ -166,6 +166,30 @@ const employeeSchema = z.object({
         .min(0, "Annual leave days must be a positive number"),
       changeDate: z.string().nonempty("Change date is required"),
     })).optional(),
+    jobStayAddress: z.object({
+      street: z.string().optional(),
+      house: z.string().optional(),
+      city: z.string().optional(),
+      state: z.string().optional(),
+      zip: z.string().optional(),
+      voivodeship: z.string().optional(),
+      jobStayAddressHistory: z.array(z.object({
+        streetBefore: z.string().optional(),
+        streetAfter: z.string().optional(),
+        houseBefore: z.string().optional(),
+        houseAfter: z.string().optional(),
+        cityBefore: z.string().optional(),
+        cityAfter: z.string().optional(),
+        stateBefore: z.string().optional(),
+        stateAfter: z.string().optional(),
+        zipBefore: z.string().optional(),
+        zipAfter: z.string().optional(),
+        voivodeshipBefore: z.string().optional(),
+        voivodeshipAfter: z.string().optional(),
+        changeDate: z.string().optional(),
+      }))
+          .optional(),
+    }).optional(),
     salary: z.object({
       baseSalary: z.number()
         .min(0, "Base salary must be a positive number"),

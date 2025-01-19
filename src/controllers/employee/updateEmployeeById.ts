@@ -75,8 +75,30 @@ const updateEmployeeData = (employee: IEmployee, data: any) => {
         .values(),
     );
 
+    let uniqueJobStayAddressHistory = null;
+
+    if (data.jobDetails?.jobStayAddress) {
+      const existingJobStayAddressHistory = employee.jobDetails?.jobStayAddress?.jobStayAddressHistory || [];
+      const newJobStayAddressHistory = data.jobDetails.jobStayAddressHistory || [];
+
+      const mergedJobStayAddressHistory = [
+        ...existingJobStayAddressHistory,
+        ...newJobStayAddressHistory,
+      ];
+
+      uniqueJobStayAddressHistory = Array.from(
+          new Map(mergedJobStayAddressHistory.map((item) => [item.changeDate, item]))
+              .values(),
+      );
+    }
+
     employee.jobDetails = {
       ...employee.jobDetails,
+      jobStayAddress: {
+        ...employee.jobDetails?.jobStayAddress,
+        ...data.jobDetails?.jobStayAddress,
+        jobStayAddressHistory: uniqueJobStayAddressHistory,
+      },
       salary: {
         ...employee.jobDetails?.salary,
         ...data.jobDetails.salary,

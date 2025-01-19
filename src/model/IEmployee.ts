@@ -112,6 +112,31 @@ export interface IEmployee extends Document {
                 changeDate: string|null;
             }
         ],
+        jobStayAddress?: {
+            street?: string|null;
+            house?: string|null;
+            city?: string|null;
+            state?: string|null;
+            zip?: string|null;
+            voivodeship?: string|null;
+            jobStayAddressHistory?: [
+                {
+                    streetBefore?: string|null;
+                    streetAfter?: string|null;
+                    houseBefore?: string|null;
+                    houseAfter?: string|null;
+                    cityBefore?: string|null;
+                    cityAfter?: string|null;
+                    stateBefore?: string|null;
+                    stateAfter?: string|null;
+                    zipBefore?: string|null;
+                    zipAfter?: string|null;
+                    voivodeshipBefore?: string|null;
+                    voivodeshipAfter?: string|null;
+                    changeDate: string|null;
+                }
+            ],
+        },
         salary?: {
             baseSalary?: number|null;
             currency?: string|null;
@@ -249,6 +274,31 @@ const EmployeeSchema: Schema = new Schema({
                 changeDate: { type: String, required: false },
             }
         ],
+        jobStayAddress: {
+          street: { type: String, required: false },
+          house: { type: String, required: false },
+          city: { type: String, required: false },
+          state: { type: String, required: false },
+          zip: { type: String, required: false },
+          voivodeship: { type: String, required: false },
+            jobStayAddressHistory: [
+                {
+                    streetBefore: { type: String, required: false },
+                    streetAfter: { type: String, required: false },
+                    houseBefore: { type: String, required: false },
+                    houseAfter: { type: String, required: false },
+                    cityBefore: { type: String, required: false },
+                    cityAfter: { type: String, required: false },
+                    stateBefore: { type: String, required: false },
+                    stateAfter: { type: String, required: false },
+                    zipBefore: { type: String, required: false },
+                    zipAfter: { type: String, required: false },
+                    voivodeshipBefore: { type: String, required: false },
+                    voivodeshipAfter: { type: String, required: false },
+                    changeDate: { type: String, required: false },
+                }
+            ],
+        },
         salary: {
             baseSalary: { type: Number, required: false },
             currency: { type: String, required: false },

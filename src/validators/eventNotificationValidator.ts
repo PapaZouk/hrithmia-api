@@ -2,13 +2,15 @@ import { z } from "npm:zod";
 
 const eventNotificationSchema = z.object({
   eventId: z.string().nonempty("Event ID is required"),
+  userId: z.string(),
   title: z.string().nonempty("Title is required"),
   description: z.string().nonempty("Description is required"),
   date: z.string().nonempty("Date is required"),
   time: z.string().nonempty("Time is required"),
   location: z.string().nonempty("Location is required"),
-  createdBy: z.string().nonempty("Created by is required"),
+  createdBy: z.string(),
   tags: z.array(z.string()).nonempty("Tags are required"),
+  isRead: z.boolean().default(false),
 });
 
 export const validateEventNotification = (data: object): boolean => {

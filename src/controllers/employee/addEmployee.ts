@@ -18,6 +18,11 @@ export const addEmployee = async (c: Context) => {
 
         const result = await employee.save();
 
+        if (result.errors) {
+            console.log("Error while saving employee");
+            throw new Error(result.errors.message);
+        }
+
         return c.json({message: "Employee saved", id: result._id}, 200);
     } catch (error) {
         console.error((error as Error).message);

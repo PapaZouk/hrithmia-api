@@ -7,7 +7,6 @@ export const getUserByAuthId = async (c: Context): Promise<TypedResponse> => {
         await connectDb();
 
         const authId = c.req.param('id');
-        console.log("Requesting user with authId: ", authId);
 
         const result = await User.findOne({ authId: authId});
 

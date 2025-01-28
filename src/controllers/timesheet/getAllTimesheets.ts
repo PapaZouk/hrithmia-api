@@ -6,7 +6,6 @@ export const getAllTimesheets = async (c: Context): Promise<TypedResponse> => {
     try {
         await connectDb();
 
-        console.log("Requesting all timesheets");
         const result = await Timesheet.find({});
 
         if (!result) {

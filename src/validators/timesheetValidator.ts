@@ -8,10 +8,10 @@ const timesheetSchema = z.object({
     totalBalance: z.number(),
     days: z.array(z.object({
         day: z.number().int().min(1, 'Day must be between 1 and 31'),
-        hours: z.number(),
+        hours: z.number().or(z.string()),
         checkIn: z.string().nonempty('Check-in time is required'),
         checkOut: z.string().nonempty('Check-out time is required'),
-        balance: z.number(),
+        balance: z.number().or(z.string()),
         dayOff: z.object({
             isDayOff: z.boolean().optional(),
             isHoliday: z.boolean().optional(),

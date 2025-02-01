@@ -90,6 +90,7 @@ const employeeSchema = z.object({
       "suspended",
       "on-leave",
       "retired",
+      "archived",
     ]),
     jobTitle: z.string().min(2, "Job title must be at least 2 characters long"),
     department: z.string().nonempty("Department name cannot be empty"),
@@ -188,7 +189,7 @@ const employeeSchema = z.object({
         voivodeshipAfter: z.string().optional(),
         changeDate: z.string().optional(),
       }))
-          .optional(),
+        .optional(),
     }).optional(),
     salary: z.object({
       baseSalary: z.number()

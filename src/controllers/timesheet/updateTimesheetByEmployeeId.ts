@@ -10,7 +10,7 @@ export const updateTimesheetByEmployeeId = async (c: Context): Promise<TypedResp
         const employeeId = c.req.param('id');
 
         if (!mongoose.Types.ObjectId.isValid(employeeId)) {
-            return c.json({ error: 'Invalid employeeId' });
+            return c.json({ error: 'Invalid employeeId' }, { status: 400 });
         }
 
         const data = await c.req.json();
@@ -22,13 +22,12 @@ export const updateTimesheetByEmployeeId = async (c: Context): Promise<TypedResp
         );
 
         if (!timesheet) {
-            c.status(404);
-            return c.json({ message: 'Timesheet not found' });
+            return c.json({ message: 'Timesheet not found' }, { status: 404 });
         }
 
-        return c.json({ message: 'Timesheet updated', timesheet });
+        return c.json({ message: 'Timesheet updated', timesheet }, { status: 200 });
     } catch (error) {
         console.error((error as Error).message);
-        return c.json({ error: (error as Error).message });
+        return c.json({ error: (error as Error).message }, { status: 500 });
     }
 }

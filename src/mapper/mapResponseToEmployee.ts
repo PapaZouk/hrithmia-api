@@ -10,7 +10,9 @@ export default function mapResponseToEmployee(data: IEmployee) {
       pesel: data.personalData.pesel,
       clothSize: data.personalData.clothSize,
       nip: data.personalData.nip,
-      personalDataHistory: data.personalData?.personalDataHistory?.map((history) => ({
+      personalDataHistory: data.personalData?.personalDataHistory?.map((
+        history,
+      ) => ({
         firstNameBefore: history.firstNameBefore,
         firstNameAfter: history.firstNameAfter,
         lastNameBefore: history.lastNameBefore,
@@ -60,7 +62,7 @@ export default function mapResponseToEmployee(data: IEmployee) {
         zip2: data.personalData?.address2?.zip2,
         voivodeship2: data.personalData?.address2?.voivodeship2,
         address2History: data.personalData?.address2?.address2History?.map((
-            history,
+          history,
         ) => ({
           street2Before: history.street2Before,
           street2After: history.street2After,
@@ -134,20 +136,22 @@ export default function mapResponseToEmployee(data: IEmployee) {
         state: data.jobDetails?.jobStayAddress?.state,
         zip: data.jobDetails?.jobStayAddress?.zip,
         voivodeship: data.jobDetails?.jobStayAddress?.voivodeship,
-        jobStayAddressHistory: data.jobDetails?.jobStayAddress?.jobStayAddressHistory?.map((history) => ({
-          streetBefore: history.streetBefore,
-          streetAfter: history.streetAfter,
-          houseBefore: history.houseBefore,
-          houseAfter: history.houseAfter,
-          cityBefore: history.cityBefore,
-          cityAfter: history.cityAfter,
-          stateBefore: history.stateBefore,
-          stateAfter: history.stateAfter,
-          zipBefore: history.zipBefore,
-          zipAfter: history.zipAfter,
-          voivodeshipBefore: history.voivodeshipBefore,
-          voivodeshipAfter: history.voivodeshipAfter,
-        })),
+        jobStayAddressHistory: data.jobDetails?.jobStayAddress
+          ?.jobStayAddressHistory?.map((history) => ({
+            streetBefore: history.streetBefore,
+            streetAfter: history.streetAfter,
+            houseBefore: history.houseBefore,
+            houseAfter: history.houseAfter,
+            cityBefore: history.cityBefore,
+            cityAfter: history.cityAfter,
+            stateBefore: history.stateBefore,
+            stateAfter: history.stateAfter,
+            zipBefore: history.zipBefore,
+            zipAfter: history.zipAfter,
+            voivodeshipBefore: history.voivodeshipBefore,
+            voivodeshipAfter: history.voivodeshipAfter,
+            changeDate: history.changeDate,
+          })),
       },
       salary: {
         baseSalary: data.jobDetails?.salary?.baseSalary,
@@ -158,8 +162,8 @@ export default function mapResponseToEmployee(data: IEmployee) {
         salaryHistory: data.jobDetails?.salary?.salaryHistory?.map((
           history,
         ) => ({
-          salaryBefore: history.salaryBefore,
-          salaryAfter: history.salaryAfter,
+          baseSalaryBefore: history.baseSalaryBefore,
+          baseSalaryAfter: history.baseSalaryAfter,
           hourlyRateBefore: history.hourlyRateBefore,
           hourlyRateAfter: history.hourlyRateAfter,
           currencyBefore: history.currencyBefore,

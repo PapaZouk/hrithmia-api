@@ -140,15 +140,15 @@ export interface IEmployee extends Document {
         salary?: {
             baseSalary?: number|null;
             currency?: string|null;
-            hourlyRate?: string|null;
+            hourlyRate?: number|null;
             bankAccount?: string|null;
             bankName?: string|null;
             salaryHistory: [
                 {
-                    salaryBefore: number|null;
-                    salaryAfter: number|null;
-                    hourlyRateBefore: string|null;
-                    hourlyRateAfter: string|null;
+                    baseSalaryBefore: number|null;
+                    baseSalaryAfter: number|null;
+                    hourlyRateBefore: number|null;
+                    hourlyRateAfter: number|null;
                     currencyBefore: string|null;
                     currencyAfter: string|null;
                     bankAccountBefore: string|null;
@@ -307,8 +307,8 @@ const EmployeeSchema: Schema = new Schema({
             bankName: { type: String, required: false },
             salaryHistory: [
                 {
-                    salaryBefore: { type: Number, required: false },
-                    salaryAfter: { type: Number, required: false },
+                    baseSalaryBefore: { type: Number, required: false },
+                    baseSalaryAfter: { type: Number, required: false },
                     hourlyRateBefore: { type: Number, required: false },
                     hourlyRateAfter: { type: Number, required: false },
                     currencyBefore: { type: String, required: false },

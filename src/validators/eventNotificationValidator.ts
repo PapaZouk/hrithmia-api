@@ -2,7 +2,7 @@ import { z } from "npm:zod";
 
 const eventNotificationSchema = z.object({
   eventId: z.string().nonempty("Event ID is required"),
-  userId: z.string(),
+  userId: z.string().nonempty("User ID is required"),
   title: z.string().nonempty("Title is required"),
   description: z.string().nonempty("Description is required"),
   date: z.string().nonempty("Date is required"),

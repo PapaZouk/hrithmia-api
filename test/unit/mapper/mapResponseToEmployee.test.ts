@@ -29,8 +29,8 @@ function assertPersonalData(employee: IEmployee) {
   assertEquals(personalData.firstName, "John");
   assertEquals(personalData.lastName, "Doe");
   assertEquals(personalData.email, "john.doe@email.com");
-  assertEquals(personalData.phone, "123456789");
-  assertEquals(personalData.pesel, "123456789");
+  assertEquals(personalData.phone, "123-456-789");
+  assertEquals(personalData.pesel, "12345678901");
   assertEquals(personalData.clothSize, "M");
   assertEquals(personalData.nip, 123456789);
   assertEquals(personalData.personalDataHistory?.length, 1);
@@ -47,10 +47,10 @@ function assertPersonalDataHistory(employee: IEmployee) {
   assertEquals(history.lastNameAfter, "Doe");
   assertEquals(history.emailBefore, "john.doe@email.com");
   assertEquals(history.emailAfter, "john.doe@email.com");
-  assertEquals(history.phoneBefore, "123456789");
-  assertEquals(history.phoneAfter, "123456789");
-  assertEquals(history.peselBefore, "123456789");
-  assertEquals(history.peselAfter, "123456789");
+  assertEquals(history.phoneBefore, "123-456-789");
+  assertEquals(history.phoneAfter, "123-456-789");
+  assertEquals(history.peselBefore, "12345678901");
+  assertEquals(history.peselAfter, "12345678901");
   assertEquals(history.clothSizeBefore, "M");
   assertEquals(history.clothSizeAfter, "M");
   assertEquals(history.nipBefore, 123456789);
@@ -141,10 +141,10 @@ function assertJobDetailsHistory(employee: IEmployee) {
   assertEquals(history.startDateAfter, new Date().toLocaleDateString());
   assertEquals(history.endDateBefore, null);
   assertEquals(history.endDateAfter, null);
-  assertEquals(history.contractTypeBefore, "full-time");
-  assertEquals(history.contractTypeAfter, "full-time");
-  assertEquals(history.workScheduleBefore, "daily");
-  assertEquals(history.workScheduleAfter, "daily");
+  assertEquals(history.contractTypeBefore, "b2b");
+  assertEquals(history.contractTypeAfter, "b2b");
+  assertEquals(history.workScheduleBefore, "full-time");
+  assertEquals(history.workScheduleAfter, "full-time");
   assertEquals(history.insuranceTypeBefore, "commercial");
   assertEquals(history.insuranceTypeAfter, "commercial");
   assertEquals(history.annualLeaveDaysBefore, 26);
@@ -227,8 +227,8 @@ function assertJobDetailsData(employee: IEmployee) {
   assertEquals(jobDetails.department, "IT");
   assertEquals(jobDetails.startDate, new Date().toLocaleDateString());
   assertEquals(jobDetails.endDate, null);
-  assertEquals(jobDetails.contractType, "full-time");
-  assertEquals(jobDetails.workSchedule, "daily");
+  assertEquals(jobDetails.contractType, "b2b");
+  assertEquals(jobDetails.workSchedule, "full-time");
   assertEquals(jobDetails.insuranceType, "commercial");
   assertEquals(jobDetails.annualLeaveDays, 26);
 

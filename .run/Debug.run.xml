@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Debug" type="DenoConfigurationType" inputPath="$PROJECT_DIR$/test/unit/**/*.test.ts" programParameters="test">
+    <option name="applicationArguments" value="--allow-env --inspect-wait=0.0.0.0:9229" />
+    <method v="2" />
+  </configuration>
+</component>

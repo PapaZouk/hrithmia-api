@@ -7,7 +7,29 @@ on:
     branches: ["master"]
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+        - name: Clone repository
+          uses: actions/checkout@v4
+
+        - name: Install Deno
+          uses: denoland/setup-deno@v2
+          with:
+            deno-version: v2.x
+
+        - name: Test
+          run: deno test --allow-net --allow-read --allow-env
+
   deploy:
+    needs: [test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     name: Deploy
     runs-on: ubuntu-latest
 

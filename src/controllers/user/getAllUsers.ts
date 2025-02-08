@@ -9,7 +9,7 @@ export const getAllUsers = async (c: Context): Promise<TypedResponse> => {
 
         const result = await User.find({});
 
-        if (!result) {
+        if (!result || result.length === 0) {
             return c.json({ error: 'No users found' }, 404);
         }
 

@@ -1,8 +1,8 @@
-import { IUser } from "../../../src/model/IUser.ts";
+import {IUser} from "../../../src/model/IUser.ts";
 
-export function createUser(overrides?: Partial<IUser>): object {
+export function createUser(overrides?: Partial<IUser>): IUser {
   return {
     authId: overrides?.authId ?? "authId",
     roles: overrides?.roles ?? ["roles"],
-  };
+  } as IUser;
 }

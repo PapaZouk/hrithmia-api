@@ -1,32 +1,23 @@
-import {describe, it, beforeAll, afterAll} from 'jsr:@std/testing/bdd';
+import {afterAll, beforeAll, describe, it} from 'jsr:@std/testing/bdd';
 import {stub} from "jsr:@std/testing/mock";
 import {expect} from 'jsr:@std/expect';
 import {Context, TypedResponse} from "hono";
 import {createUser} from "../../_mocks/createUser.ts";
 import {getAllUsers} from "../../../../src/controllers/user/getAllUsers.ts";
 import User, {IUser} from "../../../../src/model/IUser.ts";
-import mongoose from "mongoose";
 import {createQueryMock} from "../../_mocks/createQueryMock.ts";
+import {beforeAllSetup} from "../../utils/beforeAllSetup.ts";
+import {afterAllSetup} from "../../utils/afterAllSetup.ts";
 
 describe("getAllUsers", () => {
-    beforeAll(() => {
-        stub(mongoose, 'connect', () => Promise.resolve(mongoose));
-        stub(console, 'log');
-        stub(console, 'error');
-    });
+    beforeAll(() => beforeAllSetup());
+    afterAll(() => afterAllSetup());
 
-    afterAll(() => {
-        (mongoose.connect as any).restore();
-        (console.log as any).restore();
-        (console.error as any).restore();
-    });
     it("should return all users", async () => {
         const mockUsersResponse = [
             createUser({ authId: '1' }),
             createUser({ authId: '2' }),
         ];
-
-        // const connectDbStub = stub(mongoose, 'connect', () => Promise.resolve(mongoose));
 
         const findStub = stub(User, 'find', function () {
             return createQueryMock(mockUsersResponse, User);
@@ -52,8 +43,6 @@ describe("getAllUsers", () => {
     });
 
     it("should return 404 if no users found", async () => {
-        // const connectDbStub = stub(mongoose, 'connect', () => Promise.resolve(mongoose));
-
         const findStub = stub(User, 'find', function () {
             return createQueryMock([], User);
         });

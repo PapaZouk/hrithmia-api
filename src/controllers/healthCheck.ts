@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import {connectDb} from "../../database/connectDb.ts";
+import {connectDb} from "../database/connectDb.ts";
 
 export const healthCheck = async (c: Context) => {
     try {

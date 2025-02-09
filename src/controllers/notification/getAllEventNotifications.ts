@@ -7,7 +7,7 @@ export const getAllEventNotifications = async (c: Context): Promise<TypedRespons
         await connectDb();
         const result = await EventNotification.find({});
 
-        if (!result) {
+        if (!result || result.length === 0) {
             return c.json({error: "No notifications found"}, 404);
         }
 

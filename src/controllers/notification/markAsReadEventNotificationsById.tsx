@@ -25,7 +25,7 @@ export const markAsReadEventNotificationsById = async (
     }
 
     console.log("Updating all event notifications");
-    eventNotifications.forEach((notification) => {
+    eventNotifications.forEach((notification: IEventNotification) => {
       updateNotificationData(notification, { isRead: true });
       notification.save();
     });
@@ -37,7 +37,7 @@ export const markAsReadEventNotificationsById = async (
   }
 };
 
-const updateNotificationData = (
+export const updateNotificationData = (
   eventNotification: IEventNotification,
   data: any,
 ): void => {

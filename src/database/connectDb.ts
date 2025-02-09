@@ -3,6 +3,14 @@ import { getDbConfig } from "./config.ts";
 
 let isConnected: boolean = false;
 
+export function getIsConnected(): boolean {
+    return isConnected;
+}
+
+export function setIsConnected(value: boolean): void {
+    isConnected = value;
+}
+
 export async function connectDb(): Promise<void> {
     if (isConnected) {
         return;
@@ -12,9 +20,11 @@ export async function connectDb(): Promise<void> {
 
     try {
         await mongoose.connect(config.url);
-        isConnected = true;
+        setIsConnected(true);
         console.log("Connected to DB");
     } catch (error) {
         console.error("Error connecting to DB: ", error);
+        setIsConnected(false);
+        throw error;
     }
 }

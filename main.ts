@@ -2,7 +2,7 @@ import {Context, Hono} from 'hono';
 import {logger} from 'hono/logger';
 import {cors} from "hono/cors";
 import {jwt} from "hono/jwt";
-import {healthCheck} from "./src/controllers/employee/healthCheck.ts";
+import {healthCheck} from "./src/controllers/healthCheck.ts";
 import {generateToken} from "./src/authentication/generateToken.ts";
 import employeeRouter from "./src/router/employeeRouter.ts";
 import timesheetRouter from "./src/router/timesheetRouter.ts";

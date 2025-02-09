@@ -1,9 +1,9 @@
-import {Query} from "mongoose";
+import {DeleteResult, Query} from "mongoose";
 
-export function createQueryMock<T>(mockResponse: any, entity: T): Query<T[], T> {
+export function createDeleteQueryResultMock(mockResponse: DeleteResult): Query<DeleteResult, any> {
     return {
         exec: () => Promise.resolve(mockResponse),
-        then: function (resolve: (arg0: object[]) => void) {
+        then: function (resolve: (arg0: DeleteResult) => void) {
             resolve(mockResponse);
             return this;
         },
@@ -14,5 +14,5 @@ export function createQueryMock<T>(mockResponse: any, entity: T): Query<T[], T> 
             return this;
         },
         [Symbol.toStringTag]: 'Query'
-    } as unknown as Query<typeof entity[], typeof entity>;
+    } as unknown as Query<DeleteResult, any>;
 }

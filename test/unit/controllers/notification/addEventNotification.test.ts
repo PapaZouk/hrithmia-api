@@ -25,7 +25,7 @@ describe("addEventNotification", () => {
       mockEventNotification,
       notificationId,
     );
-    const mockNotification = createEventNotificationMongooseModel(
+    const notificationMongooseModel = createEventNotificationMongooseModel(
       mockEventNotification,
       notificationId,
     );
@@ -44,7 +44,7 @@ describe("addEventNotification", () => {
 
     const response = await addEventNotification(
       mockContext,
-      () => mockNotification,
+      () => notificationMongooseModel,
       () => true,
     );
     const responseJson = response._data as unknown as {

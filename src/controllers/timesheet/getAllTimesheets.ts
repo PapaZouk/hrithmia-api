@@ -8,11 +8,11 @@ export const getAllTimesheets = async (c: Context): Promise<TypedResponse> => {
 
         const result = await Timesheet.find({});
 
-        if (!result) {
+        if (!result || result.length === 0) {
             return c.json({ error: 'No timesheets found' }, 404);
         }
 
-        return c.json({result});
+        return c.json({result}, 200);
     } catch (error) {
         console.error("Error fetching timesheets:", (error as Error).message);
         return c.json({ error: (error as Error).message }, 500);

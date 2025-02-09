@@ -8,6 +8,10 @@ export const getEmployeeById = async (c: Context): Promise<TypedResponse> => {
         await connectDb();
 
         const id = c.req.param('id');
+
+        if (!id) {
+            return c.json({ message: 'ID is required' }, 400);
+        }
         console.log("Requesting employee with id: ", id);
 
         const result = await Employee.findOne({ _id: new ObjectId(id) });

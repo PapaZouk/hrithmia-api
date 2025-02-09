@@ -17,6 +17,10 @@ export const updateEmployeeById = async (
 
     const data = await c.req.json();
 
+    if (!data) {
+      return c.json({ message: "Employee data is required" }, 400);
+    }
+
     const employee: IEmployee | null = await Employee.findById(id);
 
     if (!employee) {

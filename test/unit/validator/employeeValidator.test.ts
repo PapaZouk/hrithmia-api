@@ -1,9 +1,9 @@
-import { createEmployeeData } from "../_mocks/createEmployee.ts";
+import { createEmployee } from "../_mocks/createEmployee.ts";
 import { employeeValidator } from "../../../src/validators/employeeValidator.ts";
 import { assertEquals } from "jsr:@std/assert";
 
 Deno.test("given a data object should parse it with the employeeSchema, should validate and return true ", () => {
-  const employeeData = createEmployeeData();
+  const employeeData = createEmployee();
 
   const result = employeeValidator(employeeData);
 
@@ -11,7 +11,7 @@ Deno.test("given a data object should parse it with the employeeSchema, should v
 });
 
 Deno.test("given a data object is missing firstName, should validate and return false", () => {
-  const employeeData = createEmployeeData({ personalData: { firstName: "" } });
+  const employeeData = createEmployee({ personalData: { firstName: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -19,7 +19,7 @@ Deno.test("given a data object is missing firstName, should validate and return 
 });
 
 Deno.test("given a data object is missing lastName, should validate and return false", () => {
-  const employeeData = createEmployeeData({ personalData: { lastName: "" } });
+  const employeeData = createEmployee({ personalData: { lastName: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -27,7 +27,7 @@ Deno.test("given a data object is missing lastName, should validate and return f
 });
 
 Deno.test("given a data object is missing email, should validate and return false", () => {
-  const employeeData = createEmployeeData({ personalData: { email: "" } });
+  const employeeData = createEmployee({ personalData: { email: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -35,7 +35,7 @@ Deno.test("given a data object is missing email, should validate and return fals
 });
 
 Deno.test("given a data object is missing PESEL, should validate and return false", () => {
-  const employeeData = createEmployeeData({ personalData: { pesel: "" } });
+  const employeeData = createEmployee({ personalData: { pesel: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -43,7 +43,7 @@ Deno.test("given a data object is missing PESEL, should validate and return fals
 });
 
 Deno.test("given a data object is missing clothSize, should validate and return false", () => {
-  const employeeData = createEmployeeData({ personalData: { clothSize: "" } });
+  const employeeData = createEmployee({ personalData: { clothSize: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -51,7 +51,7 @@ Deno.test("given a data object is missing clothSize, should validate and return 
 });
 
 Deno.test("given a data object is missing nip, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { nip: null as unknown as number },
   });
 
@@ -61,7 +61,7 @@ Deno.test("given a data object is missing nip, should validate and return true",
 });
 
 Deno.test("given a data object is missing personal data history, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: {
       personalDataHistory: [{
         firstNameBefore: "",
@@ -89,7 +89,7 @@ Deno.test("given a data object is missing personal data history, should validate
 });
 
 Deno.test("given address is missing street1, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address1: { street1: "" } },
   });
 
@@ -99,7 +99,7 @@ Deno.test("given address is missing street1, should validate and return false", 
 });
 
 Deno.test("given address is missing house1, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address1: { house1: "" } },
   });
 
@@ -109,7 +109,7 @@ Deno.test("given address is missing house1, should validate and return false", (
 });
 
 Deno.test("given address is missing city1, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address1: { city1: "" } },
   });
 
@@ -119,7 +119,7 @@ Deno.test("given address is missing city1, should validate and return false", ()
 });
 
 Deno.test("given address is missing state1, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address1: { state1: "" } },
   });
 
@@ -129,7 +129,7 @@ Deno.test("given address is missing state1, should validate and return false", (
 });
 
 Deno.test("given address is missing zip1, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address1: { zip1: "" } },
   });
 
@@ -139,7 +139,7 @@ Deno.test("given address is missing zip1, should validate and return false", () 
 });
 
 Deno.test("given address is missing voivodeship1, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address1: { voivodeship1: "" } },
   });
 
@@ -149,7 +149,7 @@ Deno.test("given address is missing voivodeship1, should validate and return fal
 });
 
 Deno.test("given address is missing address1 history, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: {
       address1: {
         address1History: [{
@@ -177,7 +177,7 @@ Deno.test("given address is missing address1 history, should validate and return
 });
 
 Deno.test("given address2 is missing street2, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address2: { street2: "" } },
   });
 
@@ -187,7 +187,7 @@ Deno.test("given address2 is missing street2, should validate and return true", 
 });
 
 Deno.test("given address2 is missing house2, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address2: { house2: "" } },
   });
 
@@ -197,7 +197,7 @@ Deno.test("given address2 is missing house2, should validate and return true", (
 });
 
 Deno.test("given address2 is missing city2, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address2: { city2: "" } },
   });
 
@@ -207,7 +207,7 @@ Deno.test("given address2 is missing city2, should validate and return true", ()
 });
 
 Deno.test("given address2 is missing state2, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address2: { state2: "" } },
   });
 
@@ -217,7 +217,7 @@ Deno.test("given address2 is missing state2, should validate and return true", (
 });
 
 Deno.test("given address2 is missing zip2, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address2: { zip2: "" } },
   });
 
@@ -227,7 +227,7 @@ Deno.test("given address2 is missing zip2, should validate and return true", () 
 });
 
 Deno.test("given address2 is missing voivodeship2, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: { address2: { voivodeship2: "" } },
   });
 
@@ -237,7 +237,7 @@ Deno.test("given address2 is missing voivodeship2, should validate and return tr
 });
 
 Deno.test("given address2 is missing address2 history, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     personalData: {
       address2: {
         address2History: [{
@@ -265,7 +265,7 @@ Deno.test("given address2 is missing address2 history, should validate and retur
 });
 
 Deno.test("given a data object is missing status, should validate and return false", () => {
-  const employeeData = createEmployeeData({ jobDetails: { status: "" } });
+  const employeeData = createEmployee({ jobDetails: { status: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -273,7 +273,7 @@ Deno.test("given a data object is missing status, should validate and return fal
 });
 
 Deno.test("given a data object is missing jobTitle, should validate and return false", () => {
-  const employeeData = createEmployeeData({ jobDetails: { jobTitle: "" } });
+  const employeeData = createEmployee({ jobDetails: { jobTitle: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -281,7 +281,7 @@ Deno.test("given a data object is missing jobTitle, should validate and return f
 });
 
 Deno.test("given a data object is missing department, should validate and return false", () => {
-  const employeeData = createEmployeeData({ jobDetails: { department: "" } });
+  const employeeData = createEmployee({ jobDetails: { department: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -289,7 +289,7 @@ Deno.test("given a data object is missing department, should validate and return
 });
 
 Deno.test("given a data object is missing startDate, should validate and return false", () => {
-  const employeeData = createEmployeeData({ jobDetails: { startDate: "" } });
+  const employeeData = createEmployee({ jobDetails: { startDate: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -297,7 +297,7 @@ Deno.test("given a data object is missing startDate, should validate and return 
 });
 
 Deno.test("given a data object is missing contractType, should validate and return false", () => {
-  const employeeData = createEmployeeData({ jobDetails: { contractType: "" } });
+  const employeeData = createEmployee({ jobDetails: { contractType: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -305,7 +305,7 @@ Deno.test("given a data object is missing contractType, should validate and retu
 });
 
 Deno.test("given a data object is missing workSchedule, should validate and return false", () => {
-  const employeeData = createEmployeeData({ jobDetails: { workSchedule: "" } });
+  const employeeData = createEmployee({ jobDetails: { workSchedule: "" } });
 
   const result = employeeValidator(employeeData);
 
@@ -313,7 +313,7 @@ Deno.test("given a data object is missing workSchedule, should validate and retu
 });
 
 Deno.test("given a data object is missing insuranceType, should validate and return false", () => {
-  const employeeData = createEmployeeData(
+  const employeeData = createEmployee(
     { jobDetails: { insuranceType: "" } },
   );
 
@@ -323,7 +323,7 @@ Deno.test("given a data object is missing insuranceType, should validate and ret
 });
 
 Deno.test("given a data object with invalid annualLeaveDays amount, should validate and return false", () => {
-  const employeeData = createEmployeeData(
+  const employeeData = createEmployee(
     { jobDetails: { annualLeaveDays: -1 } },
   );
 
@@ -333,7 +333,7 @@ Deno.test("given a data object with invalid annualLeaveDays amount, should valid
 });
 
 Deno.test("given a data object is missing jobDetailsHistory, should validate and return false", () => {
-  const employeeData = createEmployeeData(
+  const employeeData = createEmployee(
     {
       jobDetails: {
         jobDetailsHistory: [
@@ -369,7 +369,7 @@ Deno.test("given a data object is missing jobDetailsHistory, should validate and
 });
 
 Deno.test("given a data object is missing baseSalary, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     jobDetails: {
       salary: {
         baseSalary: null as unknown as number,
@@ -396,7 +396,7 @@ Deno.test("given a data object is missing baseSalary, should validate and return
 });
 
 Deno.test("given a data object is missing currency, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     jobDetails: {
       salary: {
         currency: null as unknown as string,
@@ -423,7 +423,7 @@ Deno.test("given a data object is missing currency, should validate and return f
 });
 
 Deno.test("given a data object is missing hourlyRate, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     jobDetails: {
       salary: {
         hourlyRate: null as unknown as number,
@@ -450,7 +450,7 @@ Deno.test("given a data object is missing hourlyRate, should validate and return
 });
 
 Deno.test("given a data object is bankAccount currency, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     jobDetails: {
       salary: {
         bankAccount: null as unknown as string,
@@ -477,7 +477,7 @@ Deno.test("given a data object is bankAccount currency, should validate and retu
 });
 
 Deno.test("given a data object is missing bankName, should validate and return false", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     jobDetails: {
       salary: {
         bankName: null as unknown as string,
@@ -504,7 +504,7 @@ Deno.test("given a data object is missing bankName, should validate and return f
 });
 
 Deno.test("given a data object is missing salaryHistory, should validate and return true", () => {
-  const employeeData = createEmployeeData({
+  const employeeData = createEmployee({
     jobDetails: {
       salary: {
         salaryHistory: [{

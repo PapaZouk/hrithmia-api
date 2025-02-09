@@ -7,7 +7,7 @@ export const getAllEmployees = async (c: Context): Promise<TypedResponse> => {
         await connectDb();
         const result = await Employee.find({});
 
-        if (!result) {
+        if (!result || result.length === 0) {
             return c.json({error: "No employees found"}, 404);
         }
 

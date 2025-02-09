@@ -1,6 +1,6 @@
 import { IEmployee } from "../../../src/model/IEmployee.ts";
 
-        export function createEmployeeData(overrides?: Partial<IEmployee>) {
+        export function createEmployee(overrides?: Partial<IEmployee>) {
           return {
             personalData: {
               firstName: overrides?.personalData?.firstName ?? "John",

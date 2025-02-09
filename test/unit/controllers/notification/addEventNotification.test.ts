@@ -37,7 +37,6 @@ describe("addEventNotification", () => {
         this._id = new mongoose.Types.ObjectId(
           notificationId.padStart(24, "0"),
         );
-        // Ensure this is typed as a Mongoose Document
         return this as mongoose.Document<IEventNotification>;
       },
     );

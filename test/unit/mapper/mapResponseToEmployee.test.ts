@@ -2,11 +2,11 @@ import {assertEquals} from "jsr:@std/assert";
 import {assertInstanceOf} from "https://deno.land/std/assert/assert_instance_of.ts";
 import Employee, {IEmployee} from "../../../src/model/IEmployee.ts";
 import mapResponseToEmployee from "../../../src/mapper/mapResponseToEmployee.ts";
-import {createEmployeeData} from "../_mocks/createEmployee.ts";
+import {createEmployee} from "../_mocks/createEmployee.ts";
 
 Deno.test("given data should map to Employee instance", () => {
   // Arrange
-  const data = createEmployeeData();
+  const data = createEmployee();
 
   // Act
   const employee = mapResponseToEmployee(data as unknown as IEmployee);

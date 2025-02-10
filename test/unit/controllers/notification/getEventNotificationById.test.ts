@@ -22,7 +22,7 @@ describe("getEventNotificationById", () => {
       userId: id,
     });
 
-    const findOneStub = stub(EventNotification, "findOne", function () {
+    const findStub = stub(EventNotification, "find", function () {
       return createQueryMock(mockEventNotificationResponse, EventNotification);
     });
 
@@ -34,16 +34,16 @@ describe("getEventNotificationById", () => {
     const response = await getEventNotificationById(mockContext);
     const responseJson = await response._data as { result: IEventNotification };
 
-    expect(findOneStub.calls.length).toBe(1);
+    expect(findStub.calls.length).toBe(1);
     expect(response._status).toBe(200);
     expect(response._data).toEqual({ result: mockEventNotificationResponse });
     expect(responseJson.result.eventId).toBe(id);
 
-    findOneStub.restore();
+    findStub.restore();
   });
 
   it("should return 404 if no event notification found", async () => {
-    const findOneStub = stub(EventNotification, "findOne", function () {
+    const findStub = stub(EventNotification, "find", function () {
       return createQueryMock(null, EventNotification);
     });
 
@@ -51,15 +51,15 @@ describe("getEventNotificationById", () => {
 
     const response = await getEventNotificationById(mockContext);
 
-    expect(findOneStub.calls.length).toBe(1);
+    expect(findStub.calls.length).toBe(1);
     expect(response._status).toBe(404);
     expect(response._data).toEqual({ error: "No notification found" });
 
-    findOneStub.restore();
+    findStub.restore();
   });
 
     it("should return 500 if an error occurs", async () => {
-        const findOneStub = stub(EventNotification, "findOne", function () {
+        const findStub = stub(EventNotification, "find", function () {
         throw new Error("Error occurred");
         });
 
@@ -67,10 +67,10 @@ describe("getEventNotificationById", () => {
 
         const response = await getEventNotificationById(mockContext);
 
-        expect(findOneStub.calls.length).toBe(1);
+        expect(findStub.calls.length).toBe(1);
         expect(response._status).toBe(500);
         expect(response._data).toEqual({ error: "Error occurred" });
 
-        findOneStub.restore();
+        findStub.restore();
     });
 });

@@ -59,12 +59,7 @@ Deno.test("config.ts should return the correct database configuration for develo
 
     const config = getDbConfig();
 
-    assertEquals(config.username, "username");
-    assertEquals(config.password, "password");
-    assertEquals(config.cluster, "cluster");
-    assertEquals(config.port, 8000);
-    assertEquals(config.appName, "app");
-    assertEquals(config.settings, "authSource=admin");
+    assertEquals(config.url, 'mongodb://localhost:27017');
 
     Deno.env.get = originalEnvironment;
 });

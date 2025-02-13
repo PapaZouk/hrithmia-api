@@ -1,10 +1,10 @@
 interface databaseConfig {
-    username: string;
-    password: string;
-    cluster: string;
-    port: number;
-    appName: string;
-    settings: string;
+    username?: string;
+    password?: string;
+    cluster?: string;
+    port?: number;
+    appName?: string;
+    settings?: string;
     url: string;
 }
 
@@ -29,13 +29,8 @@ export const getDbConfig = () => {
         url = `mongodb+srv://${username}:${password}@${cluster}/${appName}?${settings}&appName=${appName}`;
     } else {
         console.log("Using local db");
-        username = Deno.env.get("LOCAL_DB_USERNAME") || '';
-        password = Deno.env.get("LOCAL_DB_PASSWORD") || '';
-        cluster = Deno.env.get("LOCAL_DB_CLUSTER") || '';
-        port = parseInt(Deno.env.get("LOCAL_DB_PORT") || "") || 8000;
-        appName = Deno.env.get("LOCAL_DB_APP_NAME") || '';
-        settings = 'authSource=admin';
-        url = `mongodb://${username}:${password}@${cluster}:${port}/test?${settings}`;
+        url = 'mongodb://localhost:27017';
+        return { url };
     }
 
     return {

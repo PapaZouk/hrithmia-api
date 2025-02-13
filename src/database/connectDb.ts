@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { getDbConfig } from "./config.ts";
+import mongoose, {ConnectOptions} from "mongoose";
+import {getDbConfig} from "./config.ts";
 
 let isConnected: boolean = false;
 
@@ -19,7 +19,12 @@ export async function connectDb(): Promise<void> {
     const config = getDbConfig();
 
     try {
-        await mongoose.connect(config.url);
+        mongoose.set('debug', true);
+        await mongoose.connect(config.url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            allowPartialTrustChain: true,
+        } as unknown as ConnectOptions);
         setIsConnected(true);
         console.log("Connected to DB");
     } catch (error) {

@@ -14,6 +14,12 @@ const secretKey = Deno.env.get('JWT_SECRET_KEY');
 
 app.use("*", cors());
 app.use(logger());
+
+if (!secretKey) {
+    console.error("JWT_SECRET_KEY is missing. Set it in your environment.");
+    Deno.exit(1);
+}
+
 app.use('/api/auth/*', jwt({
     secret: secretKey || '', alg: 'HS256' })
 );
@@ -28,7 +34,8 @@ app.get('/api/token/:id', async (c: Context) => {
     }
 
     const jwt: string = await generateToken(id);
-    c.res.headers.set('Authorization', `Bearer ${jwt}`);
+    // c.res.headers.set('Authorization', `Bearer ${jwt}`);
+    c.header('Authorization', `Bearer ${jwt}`);
     return c.json({ jwt });
 });
 
@@ -37,4 +44,4 @@ app.route('/api/auth/timesheet', timesheetRouter);
 app.route('/api/auth/user', userRouter);
 app.route('/api/auth/notification', notificationRouter);
 
-Deno.serve(app.fetch);
+Deno.serve({ port: 8000 }, app.fetch);

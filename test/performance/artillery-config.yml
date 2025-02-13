@@ -1,0 +1,39 @@
+config:
+  target: "{{ $processEnvironment.BASE_URL }}"
+  phases:
+    - duration: "{{ $processEnvironment.WARMUP_DURATION }}"
+      arrivalRate: "{{ $processEnvironment.WARMUP_ARRIVAL_RATE }}"
+      rampTo: 5
+      name: "Warm up"
+    - duration: "{{ $processEnvironment.RAMPUP_DURATION }}"
+      arrivalRate: "{{ $processEnvironment.RAMPUP_ARRIVAL_RATE }}"
+      rampTo: 10
+      name: "Ramping up"
+    - duration: "{{ $processEnvironment.PEAK_DURATION }}"
+      arrivalRate: "{{ $processEnvironment.PEAK_ARRIVAL_RATE }}"
+      rampTo: "{{ $processEnvironment.PEAK_RAMP_TO }}"
+      name: "Peak"
+  environments:
+    default:
+      variables:
+        token: "{{ $processEnvironment.PERF_TOKEN }}"
+
+scenarios:
+  - flow:
+      - loop:
+          - get:
+              url: "/api/auth/employee/all"
+              headers:
+                content-type: "application/json"
+                authorization: "Bearer {{ $processEnvironment.PERF_TOKEN }}"
+          - get:
+              url: "/api/auth/timesheet/all/"
+              headers:
+                content-type: "application/json"
+                authorization: "Bearer {{ $processEnvironment.PERF_TOKEN }}"
+          - get:
+              url: "/api/auth/employee/67ad0a017574890ebf8ceb65"
+              headers:
+                content-type: "application/json"
+                authorization: "Bearer {{ $processEnvironment.PERF_TOKEN }}"
+        count: 1

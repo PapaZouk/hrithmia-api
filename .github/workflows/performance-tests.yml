@@ -1,0 +1,74 @@
+name: Run Performance Test with Artillery
+
+on:
+  workflow_dispatch:
+    inputs:
+      BASE_URL:
+        description: 'Base URL for the API'
+        required: true
+        default: 'https://my-api.example.com'
+      PERF_TOKEN:
+        description: 'Bearer token for authentication'
+        required: true
+        default: 'your_token_here'
+      WARMUP_DURATION:
+        description: 'Warmup phase duration'
+        required: true
+        default: '60'
+      WARMUP_ARRIVAL_RATE:
+        description: 'Warmup phase arrival rate'
+        required: true
+        default: '1'
+      RAMPUP_DURATION:
+        description: 'Ramping phase duration'
+        required: true
+        default: '60'
+      RAMPUP_ARRIVAL_RATE:
+        description: 'Ramping phase arrival rate'
+        required: true
+        default: '5'
+      PEAK_DURATION:
+        description: 'Peak phase duration'
+        required: true
+        default: '300'
+      PEAK_ARRIVAL_RATE:
+        description: 'Peak phase arrival rate'
+        required: true
+        default: '50'
+      PEAK_RAMP_TO:
+        description: 'Peak phase rampTo value'
+        required: true
+        default: '15'
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    env:
+      BASE_URL: ${{ github.event.inputs.BASE_URL }}
+      PERF_TOKEN: ${{ github.event.inputs.PERF_TOKEN }}
+      WARMUP_DURATION: ${{ github.event.inputs.WARMUP_DURATION }}
+      WARMUP_ARRIVAL_RATE: ${{ github.event.inputs.WARMUP_ARRIVAL_RATE }}
+      RAMPUP_DURATION: ${{ github.event.inputs.RAMPUP_DURATION }}
+      RAMPUP_ARRIVAL_RATE: ${{ github.event.inputs.RAMPUP_ARRIVAL_RATE }}
+      PEAK_DURATION: ${{ github.event.inputs.PEAK_DURATION }}
+      PEAK_ARRIVAL_RATE: ${{ github.event.inputs.PEAK_ARRIVAL_RATE }}
+      PEAK_RAMP_TO: ${{ github.event.inputs.PEAK_RAMP_TO }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run Artillery Performance Test
+        run: |
+          npx artillery run --output "result.json" ./test/performance/artillery-config.yml
+
+      - name: Display result.json in the console
+        run: |
+          echo "Displaying result.json:"
+          cat result.json

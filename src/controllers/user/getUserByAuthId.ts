@@ -7,6 +7,7 @@ export const getUserByAuthId = async (c: Context): Promise<TypedResponse> => {
         await connectDb();
 
         const authId = c.req.param('id');
+        console.log("Fetching user with authId:", authId);
 
         const result = await User.findOne({ authId: authId});
 
@@ -16,7 +17,7 @@ export const getUserByAuthId = async (c: Context): Promise<TypedResponse> => {
 
         return c.json({result}, 200);
     } catch (error) {
-        console.error("Error fetching user:", (error as Error).message);
+        console.error(`Error fetching user with ID: ${c.req.param('id')}:`, (error as Error).message);
         return c.json({ error: (error as Error).message }, 500);
     }
 }

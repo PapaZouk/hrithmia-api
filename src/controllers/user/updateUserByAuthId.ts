@@ -44,5 +44,13 @@ const updateUser = (user: IUser, data: any) => {
   if (data) {
     const updateRoles = [...data.roles, ...user.roles];
     user.roles = [...new Set(updateRoles)];
+    user.otpSecret = data.otpSecret || user.otpSecret;
+    user.otpEnabled = data.otpEnabled || user.otpEnabled;
+    user.otpConfirmed = data.otpConfirmed || user.otpConfirmed;
+
+    if (data.otpRecoveryCodes) {
+      const recoveryCodes = [...data.otpRecoveryCodes, ...user.otpRecoveryCodes ?? []];
+      user.otpRecoveryCodes = [...new Set(recoveryCodes)];
+    }
   }
 };

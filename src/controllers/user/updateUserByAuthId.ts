@@ -28,10 +28,9 @@ export const updateUserByAuthId = async (
       return c.json({ message: "User not found" }, 404);
     }
 
-    console.log(`Updating data for user with ID: ${id}`);
-    updateUser(user, data);
+    const updatedUser = updateUser(user, data);
 
-    await user.save();
+    await updatedUser.save();
 
     return c.json({ message: "User updated" }, 200);
   } catch (error) {
@@ -42,15 +41,19 @@ export const updateUserByAuthId = async (
 
 const updateUser = (user: IUser, data: any) => {
   if (data) {
-    const updateRoles = [...data.roles, ...user.roles];
-    user.roles = [...new Set(updateRoles)];
-    user.otpSecret = data.otpSecret || user.otpSecret;
-    user.otpEnabled = data.otpEnabled || user.otpEnabled;
-    user.otpConfirmed = data.otpConfirmed || user.otpConfirmed;
+    const userToUpdate = user;
+    const updateRoles = [...data.roles, ...userToUpdate.roles];
+    userToUpdate.roles = [...new Set(updateRoles)];
+    userToUpdate.otpConfirmed = data.otpConfirmed;
+    userToUpdate.otpEnabled = data.otpEnabled;
+    userToUpdate.otpSecret = data.otpSecret;
 
-    if (data.otpRecoveryCodes) {
-      const recoveryCodes = [...data.otpRecoveryCodes, ...user.otpRecoveryCodes ?? []];
-      user.otpRecoveryCodes = [...new Set(recoveryCodes)];
-    }
+    const recoveryCodes = [
+      ...data.otpRecoveryCodes ?? [],
+      ...userToUpdate.otpRecoveryCodes ?? [],
+    ];
+    userToUpdate.otpRecoveryCodes = [...new Set(recoveryCodes)];
+    return userToUpdate;
   }
+  return user;
 };
